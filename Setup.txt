@@ -1,0 +1,95 @@
+
+Remove:
+sudo pacman -Rc xf86-video-nouveau
+
+Install:
+sudo pacman -S bumblebee bbswitch nvidia-390xx
+sudo gpasswd -a $USER bumblebee
+sudo systemctl enable bumblebeed
+
+Config:
+sudo nano /etc/modprobe.d/bbswitch.conf
+options bbswitch load_state=0 unload_state=1
+
+sudo nano /etc/systemd/system/nvidia-enable.service
+[Unit]
+Description=Enable NVIDIA card
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo ON > /proc/acpi/bbswitch'
+
+[Install]
+WantedBy=shutdown.target
+
+sudo nano /etc/bumblebee/bumblebee.conf
+[driver-nvidia]
+PMMethod=bbswitch
+
+[driver-nouveau]
+PMMethod=bbswitch
+
+sudo nano /etc/X11/xorg.conf
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "intelgpu0"
+    Monitor        "Monitor0"
+    DefaultDepth   24
+    Option         "TwinView" "0"
+    SubSection     "Display"
+        Depth      24
+        Modes      "1920x1080_60.00"
+    EndSubSection
+EndSection
+
+Section "Screen"
+    Identifier     "Screen1"
+    Device         "intelgpu1"
+    Monitor        "Monitor1"
+    DefaultDepth   24
+    Option         "TwinView" "0"
+    SubSection     "Display"
+        Depth      24
+        Modes      "1920x1080_60.00"
+    EndSubSection
+EndSection
+
+Section "Monitor"
+    Identifier     "Monitor0"
+    Option         "Enable" "true"
+EndSection
+
+Section "Monitor"
+    Identifier     "Monitor1"
+    Option         "Enable" "true"
+EndSection
+
+Section "Device"
+    Identifier     "intelgpu0"
+    Driver         "intel"
+    Option         "XvMC" "true"
+    Option         "UseEvents" "true"
+    Option         "AccelMethod" "UXA"
+    BusID          "PCI:0:2:0"
+EndSection
+
+Section "Device"
+    Identifier     "intelgpu1"
+    Driver         "intel"
+    Option         "XvMC" "true"
+    Option         "UseEvents" "true"
+    Option         "AccelMethod" "UXA"
+    BusID          "PCI:0:2:0"
+EndSection
+
+Section "Device"
+    Identifier     "nvidiagpu1"
+    Driver         "nvidia"
+    BusID          "PCI:0:1:0"
+EndSection 
+
+--------------------------------------
+
+Then reboot your pc
+
