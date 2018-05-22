@@ -93,3 +93,7 @@ EndSection
 
 Then reboot your pc
 
+Testing:
+optirun --status
+optirun glxspheres64
+optirun wine application.exe
