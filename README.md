@@ -7,4 +7,5 @@ Working on my Arch Linux kernel version 4.16.9-1-ARCH
 
 Sources:
 https://wiki.archlinux.org/index.php/bumblebee/
+
 https://antergos.com/wiki/hardware/bumblebee-for-nvidia-optimus/
