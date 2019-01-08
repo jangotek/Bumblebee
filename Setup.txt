@@ -38,8 +38,8 @@ Section "Screen"
     DefaultDepth   24
     Option         "TwinView" "0"
     SubSection     "Display"
-        Depth      24
-        Modes      "1920x1080_60.00"
+    Depth          24
+    Modes          "1920x1080_60.00"
     EndSubSection
 EndSection
 
@@ -50,8 +50,8 @@ Section "Screen"
     DefaultDepth   24
     Option         "TwinView" "0"
     SubSection     "Display"
-        Depth      24
-        Modes      "1920x1080_60.00"
+    Depth          24
+    Modes          "1920x1080_60.00"
     EndSubSection
 EndSection
 
